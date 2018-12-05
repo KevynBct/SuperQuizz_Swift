@@ -18,6 +18,7 @@
 		1C7B51C721B6C0F2006C5B0A /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7B51C521B6C0F2006C5B0A /* QuestionTableViewCell.swift */; };
 		1C7B51C821B6C0F2006C5B0A /* QuestionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C7B51C621B6C0F2006C5B0A /* QuestionTableViewCell.xib */; };
 		1C7B51CA21B6C514006C5B0A /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C7B51C921B6C514006C5B0A /* Question.swift */; };
+		1C9818EF21B7CF3D006540AC /* CreateOrEditQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C9818EE21B7CF3D006540AC /* CreateOrEditQuestionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		1C7B51C521B6C0F2006C5B0A /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
 		1C7B51C621B6C0F2006C5B0A /* QuestionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuestionTableViewCell.xib; sourceTree = "<group>"; };
 		1C7B51C921B6C514006C5B0A /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		1C9818EE21B7CF3D006540AC /* CreateOrEditQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditQuestionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,15 +108,9 @@
 			isa = PBXGroup;
 			children = (
 				1C7B519521B6B5C2006C5B0A /* AppDelegate.swift */,
-				1C7B519721B6B5C2006C5B0A /* AnswerViewController.swift */,
-				1C7B51C521B6C0F2006C5B0A /* QuestionTableViewCell.swift */,
-				1C7B51C621B6C0F2006C5B0A /* QuestionTableViewCell.xib */,
-				1C7B51C321B6B76B006C5B0A /* QuestionsTableViewController.swift */,
-				1C7B519921B6B5C2006C5B0A /* Main.storyboard */,
+				1C9818F021B7CF4D006540AC /* UI */,
 				1C7B519C21B6B5C3006C5B0A /* Assets.xcassets */,
-				1C7B519E21B6B5C3006C5B0A /* LaunchScreen.storyboard */,
 				1C7B51A121B6B5C3006C5B0A /* Info.plist */,
-				1C7B51C921B6C514006C5B0A /* Question.swift */,
 			);
 			path = SuperQuizz;
 			sourceTree = "<group>";
@@ -135,6 +131,53 @@
 				1C7B51B721B6B5C4006C5B0A /* Info.plist */,
 			);
 			path = SuperQuizzUITests;
+			sourceTree = "<group>";
+		};
+		1C9818F021B7CF4D006540AC /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1C9818F421B7CFA1006540AC /* Model */,
+				1C9818F321B7CF6D006540AC /* IB */,
+				1C9818F221B7CF60006540AC /* Cells */,
+				1C9818F121B7CF56006540AC /* ViewControllers */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		1C9818F121B7CF56006540AC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1C7B51C321B6B76B006C5B0A /* QuestionsTableViewController.swift */,
+				1C7B519721B6B5C2006C5B0A /* AnswerViewController.swift */,
+				1C9818EE21B7CF3D006540AC /* CreateOrEditQuestionViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1C9818F221B7CF60006540AC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				1C7B51C521B6C0F2006C5B0A /* QuestionTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		1C9818F321B7CF6D006540AC /* IB */ = {
+			isa = PBXGroup;
+			children = (
+				1C7B51C621B6C0F2006C5B0A /* QuestionTableViewCell.xib */,
+				1C7B519921B6B5C2006C5B0A /* Main.storyboard */,
+				1C7B519E21B6B5C3006C5B0A /* LaunchScreen.storyboard */,
+			);
+			path = IB;
+			sourceTree = "<group>";
+		};
+		1C9818F421B7CFA1006540AC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1C7B51C921B6C514006C5B0A /* Question.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,6 +317,7 @@
 				1C7B51C721B6C0F2006C5B0A /* QuestionTableViewCell.swift in Sources */,
 				1C7B51C421B6B76B006C5B0A /* QuestionsTableViewController.swift in Sources */,
 				1C7B519621B6B5C2006C5B0A /* AppDelegate.swift in Sources */,
+				1C9818EF21B7CF3D006540AC /* CreateOrEditQuestionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,6 +24,10 @@ class Question {
         return self.propositions[index]
     }
     
+    func setProposition( index : Int, proposition : String){
+        self.propositions[index] = proposition
+    }
+    
     func isCorrectAnswer(answer : String) -> Bool {
         if answer == correctAnswer{
             return true
