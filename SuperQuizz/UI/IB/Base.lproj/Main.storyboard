@@ -33,11 +33,113 @@
                             <outlet property="delegate" destination="Zla-TQ-mah" id="ubN-rC-Gxf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="FaY-a1-5hg"/>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="FaY-a1-5hg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="lCM-ht-DSi">
+                            <connections>
+                                <segue destination="GUG-Ud-0As" kind="presentation" identifier="showCreateOrEditViewController" modalTransitionStyle="flipHorizontal" id="Qzp-Qi-xuw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cc3-Un-Eqe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-124" y="27"/>
+        </scene>
+        <!--Create Or Edit Question View Controller-->
+        <scene sceneID="g5I-Z4-10b">
+            <objects>
+                <viewController id="GUG-Ud-0As" customClass="CreateOrEditQuestionViewController" customModule="SuperQuizz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AZg-qI-e46">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B39-aJ-FLX">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Edit Question" id="okf-wP-Xtj">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="djB-i1-1H8">
+                                            <connections>
+                                                <action selector="createOrEditQuestion:" destination="GUG-Ud-0As" id="YeG-GG-GJJ"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fEf-wJ-EWU">
+                                <rect key="frame" x="8" y="80" width="304" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 1" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EK1-dy-UbJ">
+                                <rect key="frame" x="8" y="150" width="200" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 2" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ldi-KM-WDg">
+                                <rect key="frame" x="8" y="196" width="200" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 3" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bbn-Gv-FUf">
+                                <rect key="frame" x="8" y="242" width="200" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 4" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pi3-zZ-07g">
+                                <rect key="frame" x="8" y="288" width="200" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Correct answer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q7V-N5-VMn">
+                                <rect key="frame" x="8" y="334" width="200" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3Wt-Oc-YW6" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Q7V-N5-VMn" secondAttribute="trailing" constant="8" id="2PI-yC-mBz"/>
+                            <constraint firstItem="3Wt-Oc-YW6" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bbn-Gv-FUf" secondAttribute="trailing" constant="8" id="4xd-v6-HyK"/>
+                            <constraint firstItem="3Wt-Oc-YW6" firstAttribute="trailing" secondItem="fEf-wJ-EWU" secondAttribute="trailing" constant="8" id="823-sP-WiA"/>
+                            <constraint firstItem="3Wt-Oc-YW6" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EK1-dy-UbJ" secondAttribute="trailing" constant="8" id="8vO-46-32m"/>
+                            <constraint firstItem="Q7V-N5-VMn" firstAttribute="top" secondItem="Pi3-zZ-07g" secondAttribute="bottom" constant="16" id="B70-vk-uNY"/>
+                            <constraint firstItem="bbn-Gv-FUf" firstAttribute="top" secondItem="Ldi-KM-WDg" secondAttribute="bottom" constant="16" id="EBu-QW-AJx"/>
+                            <constraint firstItem="EK1-dy-UbJ" firstAttribute="leading" secondItem="3Wt-Oc-YW6" secondAttribute="leading" constant="8" id="Emk-9c-mGP"/>
+                            <constraint firstItem="B39-aJ-FLX" firstAttribute="trailing" secondItem="3Wt-Oc-YW6" secondAttribute="trailing" id="FN8-tJ-HKv"/>
+                            <constraint firstItem="3Wt-Oc-YW6" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Pi3-zZ-07g" secondAttribute="trailing" constant="8" id="Fee-fz-J9l"/>
+                            <constraint firstItem="B39-aJ-FLX" firstAttribute="leading" secondItem="3Wt-Oc-YW6" secondAttribute="leading" id="JYl-5O-m35"/>
+                            <constraint firstItem="bbn-Gv-FUf" firstAttribute="leading" secondItem="3Wt-Oc-YW6" secondAttribute="leading" constant="8" id="M5G-dK-vwG"/>
+                            <constraint firstItem="Ldi-KM-WDg" firstAttribute="top" secondItem="EK1-dy-UbJ" secondAttribute="bottom" constant="16" id="UWT-ER-7tt"/>
+                            <constraint firstItem="EK1-dy-UbJ" firstAttribute="top" secondItem="fEf-wJ-EWU" secondAttribute="bottom" constant="40" id="c94-cV-xaA"/>
+                            <constraint firstItem="3Wt-Oc-YW6" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ldi-KM-WDg" secondAttribute="trailing" constant="8" id="flA-EF-3Tr"/>
+                            <constraint firstItem="fEf-wJ-EWU" firstAttribute="top" secondItem="B39-aJ-FLX" secondAttribute="bottom" constant="16" id="gHh-id-5T4"/>
+                            <constraint firstItem="Ldi-KM-WDg" firstAttribute="leading" secondItem="3Wt-Oc-YW6" secondAttribute="leading" constant="8" id="qHc-aa-5PX"/>
+                            <constraint firstItem="fEf-wJ-EWU" firstAttribute="leading" secondItem="3Wt-Oc-YW6" secondAttribute="leading" constant="8" id="slS-vz-nfp"/>
+                            <constraint firstItem="Pi3-zZ-07g" firstAttribute="top" secondItem="bbn-Gv-FUf" secondAttribute="bottom" constant="16" id="xBT-0Q-Jrp"/>
+                            <constraint firstItem="Pi3-zZ-07g" firstAttribute="leading" secondItem="3Wt-Oc-YW6" secondAttribute="leading" constant="8" id="xSy-wm-g1Q"/>
+                            <constraint firstItem="Q7V-N5-VMn" firstAttribute="leading" secondItem="3Wt-Oc-YW6" secondAttribute="leading" constant="8" id="yH4-NF-73z"/>
+                            <constraint firstItem="B39-aJ-FLX" firstAttribute="top" secondItem="3Wt-Oc-YW6" secondAttribute="top" id="zre-l6-zWa"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3Wt-Oc-YW6"/>
+                    </view>
+                    <connections>
+                        <outlet property="answer1TextField" destination="EK1-dy-UbJ" id="mfv-SL-Pld"/>
+                        <outlet property="answer2TextField" destination="Ldi-KM-WDg" id="AYy-9B-yXV"/>
+                        <outlet property="answer3TextField" destination="bbn-Gv-FUf" id="yol-HM-aSk"/>
+                        <outlet property="answer4TextField" destination="Pi3-zZ-07g" id="FgU-Gg-jld"/>
+                        <outlet property="correctAnswerTextField" destination="Q7V-N5-VMn" id="Gku-ti-FoE"/>
+                        <outlet property="titleTextField" destination="fEf-wJ-EWU" id="hPc-Vz-O89"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FFU-Jx-Wzf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076.25" y="25.35211267605634"/>
         </scene>
         <!--Answer View Controller-->
         <scene sceneID="s7N-OM-zfZ">
