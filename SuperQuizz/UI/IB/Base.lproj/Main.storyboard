@@ -54,7 +54,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B39-aJ-FLX">
-                                <rect key="frame" x="0.0" y="20" width="226" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Edit Question" id="okf-wP-Xtj">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="MwQ-88-N6c">
