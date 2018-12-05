@@ -72,13 +72,46 @@ class QuestionsTableViewController: UITableViewController {
         controller.question = questionList[indexPath.row]
         
         controller.setOnReponseAnswered { (questionAnswered, result) in
-            //TODO: Mettre à jour la liste
-            self.navigationController?.popViewController(animated: true)
-            print(result)
-            self.tableView.reloadData()
+            let wrongOrRightAnswer : String
+            if result {
+                wrongOrRightAnswer = "Bonne réponse !"
+            }else{
+                wrongOrRightAnswer = "Mauvaise réponse..."
+            }
+            let wrongOrRightAnswerController = UIAlertController(title: wrongOrRightAnswer, message: "La bonne réponse est \(questionAnswered.correctAnswer ?? "") ", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default) { (action:UIAlertAction) in
+                self.navigationController?.popViewController(animated: true)
+            }
+            wrongOrRightAnswerController.addAction(action)
+            self.present(wrongOrRightAnswerController, animated: true, completion: nil)
+
         }
         
         self.show(controller, sender: self)
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+            
+            let deleteQuestion = NSLocalizedString("Delete", comment: "Delete question")
+            let deleteAction = UITableViewRowAction(style: .destructive, title: deleteQuestion) { (action, indexPath) in
+                self.questionList.remove(at: indexPath.row)
+                self.tableView.reloadData()
+            }
+            
+            let editQuestion = NSLocalizedString("Edit", comment: "Edit question")
+            let editAction = UITableViewRowAction(style: .normal, title: editQuestion) { (action, indexPath) in
+                guard let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateOrEditQuestionViewController") as? CreateOrEditQuestionViewController else {
+                    return
+                }
+                
+                controller.questionToEdit = self.questionList[indexPath.row]
+                controller.indexOfQuestionToEdit = indexPath.row
+                controller.delegate = self
+                
+                self.show(controller, sender: self)
+            }
+        
+            return [editAction, deleteAction]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -90,13 +123,17 @@ class QuestionsTableViewController: UITableViewController {
 }
 
 extension QuestionsTableViewController : CreateOrEditQuestionDelegate {
-    func userDidEditQuestion(q: Question) {
-        //TODO: Edit question
+    func userDidEditQuestion(q: Question, index : Int) {
+        questionList[index] = q
+        self.tableView.reloadData()
+//        self.presentedViewController?.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func userDidCreateQuestion(q: Question) {
         questionList.append(q)
         self.tableView.reloadData()
+        self.presentedViewController?.dismiss(animated: true, completion: nil)
     }
     
 }
