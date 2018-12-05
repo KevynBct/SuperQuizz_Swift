@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8C2-Fq-xg2">
-                        <rect key="frame" x="16" y="11.5" width="288" height="20.5"/>
+                        <rect key="frame" x="16" y="11" width="69" height="20.5"/>
                         <viewLayoutGuide key="safeArea" id="Pcr-EA-6BG"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -28,10 +28,8 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="8C2-Fq-xg2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3bS-ha-Ctr"/>
-                    <constraint firstItem="8C2-Fq-xg2" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="5L5-q8-Wu3"/>
-                    <constraint firstItem="8C2-Fq-xg2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="NRC-tX-OkF"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="8C2-Fq-xg2" secondAttribute="trailing" id="VdS-6v-oCh"/>
+                    <constraint firstItem="8C2-Fq-xg2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="dOY-Yb-KK5"/>
+                    <constraint firstItem="8C2-Fq-xg2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="iYC-s1-XFj"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

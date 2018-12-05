@@ -36,7 +36,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="FaY-a1-5hg">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="lCM-ht-DSi">
                             <connections>
-                                <segue destination="GUG-Ud-0As" kind="presentation" identifier="showCreateOrEditViewController" modalTransitionStyle="flipHorizontal" id="Qzp-Qi-xuw"/>
+                                <segue destination="GUG-Ud-0As" kind="presentation" identifier="showCreateOrEditViewController" modalTransitionStyle="coverVertical" id="Qzp-Qi-xuw"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -54,9 +54,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B39-aJ-FLX">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="226" height="44"/>
                                 <items>
                                     <navigationItem title="Edit Question" id="okf-wP-Xtj">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="MwQ-88-N6c">
+                                            <connections>
+                                                <action selector="onCancelButtonTap:" destination="GUG-Ud-0As" id="JIc-Eb-cO9"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="djB-i1-1H8">
                                             <connections>
                                                 <action selector="createOrEditQuestion:" destination="GUG-Ud-0As" id="YeG-GG-GJJ"/>

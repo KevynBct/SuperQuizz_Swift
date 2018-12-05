@@ -42,6 +42,9 @@ class CreateOrEditQuestionViewController: UIViewController{
     }
     
     @IBAction func createOrEditQuestion(_ sender: Any) {
+        if !verifyTextFieldsAreNotEmpty(){
+            return
+        }
         if let question = questionToEdit {
             question.questionTitle = titleTextField.text ?? ""
             question.setProposition(index: 0, proposition: answer1TextField.text ?? "")
@@ -62,6 +65,7 @@ class CreateOrEditQuestionViewController: UIViewController{
             delegate?.userDidCreateQuestion(q: question)
         }
     }
+    
     @IBAction func onAnswerSwitchButtonTap(_ sender: UISwitch) {
         resetAllAnswersSwitchButtons()
         sender.isOn = true
@@ -99,4 +103,30 @@ class CreateOrEditQuestionViewController: UIViewController{
             return answer4TextField.text ?? ""
         }
     }
+    
+    func verifyTextFieldsAreNotEmpty() -> Bool {
+        var isOk = true
+        if titleTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            answer1TextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            answer2TextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            answer3TextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            answer4TextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""{
+            isOk = false
+        }
+        
+        if !isOk {
+            let textFieldsAreNotOk = UIAlertController(title: "Erreur", message: "Un ou plusieurs champ(s) manquant(s) !", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default) { (action:UIAlertAction) in
+            }
+            textFieldsAreNotOk.addAction(action)
+            self.present(textFieldsAreNotOk, animated: true, completion: nil)
+        }
+        
+        return isOk
+    }
+    
+    @IBAction func onCancelButtonTap(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
