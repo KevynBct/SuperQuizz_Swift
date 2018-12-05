@@ -9,7 +9,7 @@
 class Question {
     var questionId : Int?
     var questionTitle : String
-    var propositions : [String]?
+    var propositions = [String]()
     var correctAnswer : String?
     
     init(_ questionTitle : String) {
@@ -17,11 +17,19 @@ class Question {
     }
     
     func addProposition(_ proposition : String){
-        self.propositions?.append(proposition)
+        self.propositions.append(proposition)
     }
     
     func getProposition(_ index : Int) -> String {
-        return self.propositions?[index] ?? "Answer not exist at index \(index)"
+        return self.propositions[index]
+    }
+    
+    func isCorrectAnswer(answer : String) -> Bool {
+        if answer == correctAnswer{
+            return true
+        }else{
+            return false
+        }
     }
     
 }
