@@ -24,7 +24,7 @@ class QuestionsTableViewController: UITableViewController {
         super.viewWillAppear(true)
         
         let _ = APIClient.instance.getAllQuestionsFromServer(onSuccess: { (questionsListFromServer) in
-            if(self.questionList.count == 0){
+            if(self.questionList.count != questionsListFromServer.count){
                 self.questionList = questionsListFromServer
             }
             DispatchQueue.main.async {
@@ -100,7 +100,13 @@ class QuestionsTableViewController: UITableViewController {
                 let confirmToDeleteAlertController = UIAlertController(title: "Confirmation", message: "Voulez vous vraiment supprimer cette question ?", preferredStyle: .alert)
                 
                 let actionOk = UIAlertAction(title: "Oui", style: .default) { (action:UIAlertAction) in
-                    self.questionList.remove(at: indexPath.row)
+                    APIClient.instance.deleteQuestionOnServer(questionToDelete: self.questionList[indexPath.row], onSuccess: {
+                        print("Question supprimée")
+                        self.viewWillAppear(true)
+                    }, onError: { (error) in
+                        print(error)
+                    })
+                    //self.questionList.remove(at: indexPath.row)
                     self.tableView.reloadData()
                 }
                 
@@ -139,13 +145,15 @@ class QuestionsTableViewController: UITableViewController {
 
 extension QuestionsTableViewController : CreateOrEditQuestionDelegate {
     func userDidEditQuestion(q: Question, index : Int) {
-        questionList[index] = q
-        self.tableView.reloadData()
+        APIClient.instance.updateQuestionOnServer(questionToUpdate: q, onSuccess: {
+            print("Question modifiée")
+        }) { (error) in
+            print(error)
+        }
         self.navigationController?.popViewController(animated: true)
     }
     
     func userDidCreateQuestion(q: Question) {
-        questionList.append(q)
         APIClient.instance.postQuestionOnServer(questionToAdd: q, onSuccess: {
             print("Question ajoutée")
         }) { (error) in

@@ -71,7 +71,7 @@ class APIClient {
                                     self.ANSWER_2 : questionToAdd.getProposition(1),
                                     self.ANSWER_3 : questionToAdd.getProposition(2),
                                     self.ANSWER_4 : questionToAdd.getProposition(3),
-                                    self.ANSWER_4 : questionToAdd.getCorrectAnswerIndex() + 1,
+                                    self.CORRECT_ANSWER : questionToAdd.getCorrectAnswerIndex() + 1,
                                     self.AUTHOR : "Kevyn"]
         
         
@@ -94,4 +94,57 @@ class APIClient {
         
         return task
     }
+    
+    func deleteQuestionOnServer(questionToDelete : Question, onSuccess: @escaping () -> (), onError: @escaping (Error) -> ())  -> URLSessionTask {
+        
+        let questionToDeleteId = questionToDelete.questionId ?? -1
+        
+        var request = URLRequest(url: URL(string: "\(urlServerAddress)/\(questionToDeleteId)")! )
+        request.httpMethod = "DELETE"
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if data != nil {
+                onSuccess()
+            }else  {
+                onError(error!)
+            }
+        }
+        task.resume()
+        
+        return task
+    }
+    
+    func updateQuestionOnServer(questionToUpdate : Question, onSuccess: @escaping () -> (), onError: @escaping (Error) -> ())  -> URLSessionTask {
+        
+        let questionToUpdateId = questionToUpdate.questionId ?? -1
+        
+        let json : [String: Any] = [self.TITLE : questionToUpdate.questionTitle,
+                                    self.ANSWER_1 : questionToUpdate.getProposition(0),
+                                    self.ANSWER_2 : questionToUpdate.getProposition(1),
+                                    self.ANSWER_3 : questionToUpdate.getProposition(2),
+                                    self.ANSWER_4 : questionToUpdate.getProposition(3),
+                                    self.CORRECT_ANSWER : questionToUpdate.getCorrectAnswerIndex() + 1,
+                                    self.AUTHOR : "Kevyn"]
+        
+        
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        var request = URLRequest(url: URL(string: "\(urlServerAddress)/\(questionToUpdateId)")! )
+        request.httpMethod = "PUT"
+        request.httpBody = jsonData
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if data != nil {
+                onSuccess()
+            }else  {
+                onError(error!)
+            }
+        }
+        task.resume()
+        
+        return task
+    }
+    
 }

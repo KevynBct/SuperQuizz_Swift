@@ -48,6 +48,11 @@ class AnswerViewController: UIViewController {
         
         DispatchQueue.global(qos : .userInitiated).async(execute: work!)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        work?.cancel()
+    }
 
     @IBAction func onButtonAnswerTap(_ sender: UIButton) {
         work?.cancel()
