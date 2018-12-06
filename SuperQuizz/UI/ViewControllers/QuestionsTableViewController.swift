@@ -18,30 +18,21 @@ class QuestionsTableViewController: UITableViewController {
 
         tableView.register(UINib(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
         
-        let question1 = Question("Quel est la capitale de la France ?")
-        question1.addProposition("Marseille")
-        question1.addProposition("Nantes")
-        question1.addProposition("Paris")
-        question1.addProposition("Lyon")
-        question1.correctAnswer = "Paris"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
-        let question2 = Question("Quel est la capitale de l'Espagne ?")
-        question2.addProposition("Madrid")
-        question2.addProposition("Bilbao")
-        question2.addProposition("Barcelone")
-        question2.addProposition("Valence")
-        question2.correctAnswer = "Madrid"
-        
-        let question3 = Question("Quel est la capitale du Japon ?")
-        question3.addProposition("Nara")
-        question3.addProposition("Osaka")
-        question3.addProposition("Kyoto")
-        question3.addProposition("Tokyo")
-        question3.correctAnswer = "Tokyo"
-        
-        questionList.append(question1)
-        questionList.append(question2)
-        questionList.append(question3)
+        let _ = APIClient.instance.getAllQuestionsFromServer(onSuccess: { (questionsListFromServer) in
+            if(self.questionList.count != questionsListFromServer.count){
+                self.questionList = questionsListFromServer
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }) { (error) in
+            print(error)
+        }
     }
 
     // MARK: - Table view data source
@@ -59,7 +50,16 @@ class QuestionsTableViewController: UITableViewController {
         
         let question : Question = questionList[indexPath.row]
         
-        cell.questionTitleLabel.text = "\(indexPath.row + 1)) \(question.questionTitle)"
+        cell.questionTitleLabel.text = "\(indexPath.row + 1) - \(question.questionTitle)"
+        
+        
+        if(question.userAnswer != nil){
+            if(question.isCorrectAnswer(answer: question.userAnswer!)){
+                cell.questionTitleLabel.textColor = UIColor.green
+            }else{
+                cell.questionTitleLabel.textColor = UIColor.red
+            }
+        }
     
         return cell
     }
@@ -71,9 +71,10 @@ class QuestionsTableViewController: UITableViewController {
         
         controller.question = questionList[indexPath.row]
         
-        controller.setOnReponseAnswered { (questionAnswered, result) in
+        controller.setOnReponseAnswered { (questionAnswered, userAnswer) in
             let wrongOrRightAnswer : String
-            if result {
+            let result = questionAnswered.isCorrectAnswer(answer: userAnswer)
+            if result{
                 wrongOrRightAnswer = "Bonne réponse !"
             }else{
                 wrongOrRightAnswer = "Mauvaise réponse..."
@@ -84,7 +85,9 @@ class QuestionsTableViewController: UITableViewController {
             }
             wrongOrRightAnswerController.addAction(action)
             self.present(wrongOrRightAnswerController, animated: true, completion: nil)
-
+            
+            self.questionList[indexPath.row].userAnswer = userAnswer
+            self.tableView.reloadData()
         }
         
         self.show(controller, sender: self)
@@ -94,8 +97,26 @@ class QuestionsTableViewController: UITableViewController {
             
             let deleteQuestion = NSLocalizedString("Delete", comment: "Delete question")
             let deleteAction = UITableViewRowAction(style: .destructive, title: deleteQuestion) { (action, indexPath) in
-                self.questionList.remove(at: indexPath.row)
-                self.tableView.reloadData()
+                let confirmToDeleteAlertController = UIAlertController(title: "Confirmation", message: "Voulez vous vraiment supprimer cette question ?", preferredStyle: .alert)
+                
+                let actionOk = UIAlertAction(title: "Oui", style: .default) { (action:UIAlertAction) in
+                    APIClient.instance.deleteQuestionOnServer(questionToDelete: self.questionList[indexPath.row], onSuccess: {
+                        print("Question supprimée")
+                        self.viewWillAppear(true)
+                    }, onError: { (error) in
+                        print(error)
+                    })
+                    //self.questionList.remove(at: indexPath.row)
+                    self.tableView.reloadData()
+                }
+                
+                let actionCancel = UIAlertAction(title: "Non", style: .cancel, handler: { (action:UIAlertAction) in
+                })
+                
+                confirmToDeleteAlertController.addAction(actionOk)
+                confirmToDeleteAlertController.addAction(actionCancel)
+                
+                self.present(confirmToDeleteAlertController, animated: true, completion: nil)
             }
             
             let editQuestion = NSLocalizedString("Edit", comment: "Edit question")
@@ -124,14 +145,20 @@ class QuestionsTableViewController: UITableViewController {
 
 extension QuestionsTableViewController : CreateOrEditQuestionDelegate {
     func userDidEditQuestion(q: Question, index : Int) {
-        questionList[index] = q
-        self.tableView.reloadData()
-//        self.presentedViewController?.dismiss(animated: true, completion: nil)
+        APIClient.instance.updateQuestionOnServer(questionToUpdate: q, onSuccess: {
+            print("Question modifiée")
+        }) { (error) in
+            print(error)
+        }
         self.navigationController?.popViewController(animated: true)
     }
     
     func userDidCreateQuestion(q: Question) {
-        questionList.append(q)
+        APIClient.instance.postQuestionOnServer(questionToAdd: q, onSuccess: {
+            print("Question ajoutée")
+        }) { (error) in
+            print(error)
+        }
         self.tableView.reloadData()
         self.presentedViewController?.dismiss(animated: true, completion: nil)
     }
