@@ -23,7 +23,7 @@ class APIClient {
         
     }
     
-    func getAllQuestionsFromServer(onSuccess: @escaping ([Question]) -> (), onError: @escaping (Error) -> ()) -> URLSessionTask {
+    @discardableResult func getAllQuestionsFromServer(onSuccess: @escaping ([Question]) -> (), onError: @escaping (Error) -> ()) -> URLSessionTask {
         
         var request = URLRequest(url: URL(string: urlServerAddress)! )
         request.httpMethod = "GET"
@@ -65,7 +65,7 @@ class APIClient {
         return task
     }
     
-    func postQuestionOnServer(questionToAdd : Question, onSuccess: @escaping () -> (), onError: @escaping (Error) -> ())  -> URLSessionTask {
+    @discardableResult func postQuestionOnServer(questionToAdd : Question, onSuccess: @escaping () -> (), onError: @escaping (Error) -> ())  -> URLSessionTask {
         let json : [String: Any] = [self.TITLE : questionToAdd.questionTitle,
                                     self.ANSWER_1 : questionToAdd.getProposition(0),
                                     self.ANSWER_2 : questionToAdd.getProposition(1),
@@ -95,7 +95,7 @@ class APIClient {
         return task
     }
     
-    func deleteQuestionOnServer(questionToDelete : Question, onSuccess: @escaping () -> (), onError: @escaping (Error) -> ())  -> URLSessionTask {
+    @discardableResult func deleteQuestionOnServer(questionToDelete : Question, onSuccess: @escaping () -> (), onError: @escaping (Error) -> ())  -> URLSessionTask {
         
         let questionToDeleteId = questionToDelete.questionId ?? -1
         
@@ -114,7 +114,7 @@ class APIClient {
         return task
     }
     
-    func updateQuestionOnServer(questionToUpdate : Question, onSuccess: @escaping () -> (), onError: @escaping (Error) -> ())  -> URLSessionTask {
+    @discardableResult func updateQuestionOnServer(questionToUpdate : Question, onSuccess: @escaping () -> (), onError: @escaping (Error) -> ())  -> URLSessionTask {
         
         let questionToUpdateId = questionToUpdate.questionId ?? -1
         

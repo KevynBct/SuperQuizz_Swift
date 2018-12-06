@@ -45,6 +45,7 @@ class QuestionsTableViewController: UITableViewController {
         return questionList.count
     }
 
+    // MARK: - Format des cellules
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell", for: indexPath) as! QuestionTableViewCell
         
@@ -59,11 +60,14 @@ class QuestionsTableViewController: UITableViewController {
             }else{
                 cell.questionTitleLabel.textColor = UIColor.red
             }
+        }else{
+            cell.questionTitleLabel.textColor = UIColor.black
         }
     
         return cell
     }
     
+    // MARK: - User answer
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AnswerViewController") as? AnswerViewController else {
             return
@@ -93,6 +97,7 @@ class QuestionsTableViewController: UITableViewController {
         self.show(controller, sender: self)
     }
     
+    // MARK: - Delete question
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
             
             let deleteQuestion = NSLocalizedString("Delete", comment: "Delete question")
@@ -100,14 +105,18 @@ class QuestionsTableViewController: UITableViewController {
                 let confirmToDeleteAlertController = UIAlertController(title: "Confirmation", message: "Voulez vous vraiment supprimer cette question ?", preferredStyle: .alert)
                 
                 let actionOk = UIAlertAction(title: "Oui", style: .default) { (action:UIAlertAction) in
+                    
                     APIClient.instance.deleteQuestionOnServer(questionToDelete: self.questionList[indexPath.row], onSuccess: {
-                        print("Question supprimée")
-                        self.viewWillAppear(true)
+                    print("Question supprimée")
+                    DispatchQueue.main.async {
+                        self.questionList.remove(at: indexPath.row)
+                        self.tableView.beginUpdates()
+                        self.tableView.deleteRows(at: [indexPath], with: .fade)
+                        self.tableView.endUpdates()
+                    }
                     }, onError: { (error) in
                         print(error)
                     })
-                    //self.questionList.remove(at: indexPath.row)
-                    self.tableView.reloadData()
                 }
                 
                 let actionCancel = UIAlertAction(title: "Non", style: .cancel, handler: { (action:UIAlertAction) in
@@ -135,6 +144,7 @@ class QuestionsTableViewController: UITableViewController {
             return [editAction, deleteAction]
     }
     
+    // MARK: - Create or Edit
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showCreateOrEditViewController" {
             let controller = segue.destination as! CreateOrEditQuestionViewController
@@ -145,7 +155,7 @@ class QuestionsTableViewController: UITableViewController {
 
 extension QuestionsTableViewController : CreateOrEditQuestionDelegate {
     func userDidEditQuestion(q: Question, index : Int) {
-        APIClient.instance.updateQuestionOnServer(questionToUpdate: q, onSuccess: {
+         APIClient.instance.updateQuestionOnServer(questionToUpdate: q, onSuccess: {
             print("Question modifiée")
         }) { (error) in
             print(error)
