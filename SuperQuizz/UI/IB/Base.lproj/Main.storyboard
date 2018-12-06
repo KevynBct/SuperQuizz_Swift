@@ -241,13 +241,19 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="LSQ-vT-MYA">
+                                <rect key="frame" x="32" y="388" width="256" height="2"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="EHw-1I-Wtp" firstAttribute="leading" secondItem="Rkf-fH-jod" secondAttribute="leading" constant="20" id="0tj-RR-HZ9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="LSQ-vT-MYA" secondAttribute="trailing" constant="16" id="3P7-9M-zo6"/>
                             <constraint firstItem="Rkf-fH-jod" firstAttribute="trailing" secondItem="EHw-1I-Wtp" secondAttribute="trailing" constant="20" id="3hk-qK-pxm"/>
                             <constraint firstItem="Rkf-fH-jod" firstAttribute="trailing" secondItem="rj8-Rl-cs3" secondAttribute="trailing" constant="12" id="P5U-x3-hpZ"/>
                             <constraint firstItem="Rkf-fH-jod" firstAttribute="bottom" secondItem="EHw-1I-Wtp" secondAttribute="bottom" constant="50" id="YwF-Sg-USd"/>
+                            <constraint firstItem="LSQ-vT-MYA" firstAttribute="leading" secondItem="sEa-Il-ChH" secondAttribute="leadingMargin" constant="16" id="fFH-Z0-VLZ"/>
+                            <constraint firstItem="EHw-1I-Wtp" firstAttribute="top" secondItem="LSQ-vT-MYA" secondAttribute="bottom" constant="24" id="hza-qP-azg"/>
                             <constraint firstItem="rj8-Rl-cs3" firstAttribute="leading" secondItem="Rkf-fH-jod" secondAttribute="leading" constant="12" id="muH-6M-FUB"/>
                             <constraint firstItem="rj8-Rl-cs3" firstAttribute="top" secondItem="Rkf-fH-jod" secondAttribute="top" constant="12" id="ucj-7s-ccC"/>
                         </constraints>
@@ -259,6 +265,7 @@
                         <outlet property="answer3" destination="P3h-Ke-Dy0" id="QK5-SR-SWa"/>
                         <outlet property="answer4" destination="ZAY-Qk-eCp" id="hVs-l9-lay"/>
                         <outlet property="answerQuestionLabel" destination="rj8-Rl-cs3" id="59i-8A-VyX"/>
+                        <outlet property="questionProgressView" destination="LSQ-vT-MYA" id="u6i-MG-1La"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qkl-PU-DLt" userLabel="First Responder" sceneMemberID="firstResponder"/>

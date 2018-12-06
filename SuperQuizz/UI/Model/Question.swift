@@ -11,6 +11,7 @@ class Question {
     var questionTitle : String
     var propositions = [String]()
     var correctAnswer : String?
+    var userAnswer : String?
     
     init(_ questionTitle : String) {
         self.questionTitle = questionTitle
@@ -28,6 +29,19 @@ class Question {
         self.propositions[index] = proposition
     }
     
+    func getCorrectAnswerIndex() -> Int {
+        switch correctAnswer {
+        case getProposition(0):
+            return 0
+        case getProposition(0):
+            return 1
+        case getProposition(0):
+            return 2
+        default:
+            return 3
+        }
+    }
+    
     func isCorrectAnswer(answer : String) -> Bool {
         if answer == correctAnswer{
             return true
@@ -35,5 +49,4 @@ class Question {
             return false
         }
     }
-    
 }
