@@ -29,6 +29,11 @@ class QuestionsTableViewController: UITableViewController {
             }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                var scoreCount = 0
+                for question in self.questionList{
+                    scoreCount += question.getPoint()
+                }
+                self.title = "Score \(scoreCount)/\(self.questionList.count)"
             }
         }) { (error) in
             print(error)
@@ -76,20 +81,20 @@ class QuestionsTableViewController: UITableViewController {
         controller.question = questionList[indexPath.row]
         
         controller.setOnReponseAnswered { (questionAnswered, userAnswer) in
-            let wrongOrRightAnswer : String
-            let result = questionAnswered.isCorrectAnswer(answer: userAnswer)
-            if result{
-                wrongOrRightAnswer = "Bonne réponse !"
-            }else{
-                wrongOrRightAnswer = "Mauvaise réponse..."
-            }
-            let wrongOrRightAnswerController = UIAlertController(title: wrongOrRightAnswer, message: "La bonne réponse est \(questionAnswered.correctAnswer ?? "") ", preferredStyle: .alert)
-            let action = UIAlertAction(title: "Ok", style: .default) { (action:UIAlertAction) in
-                self.navigationController?.popViewController(animated: true)
-            }
-            wrongOrRightAnswerController.addAction(action)
-            self.present(wrongOrRightAnswerController, animated: true, completion: nil)
-            
+//            let wrongOrRightAnswer : String
+//            let result = questionAnswered.isCorrectAnswer(answer: userAnswer)
+//            if result{
+//                wrongOrRightAnswer = "Bonne réponse !"
+//            }else{
+//                wrongOrRightAnswer = "Mauvaise réponse..."
+//            }
+//            let wrongOrRightAnswerController = UIAlertController(title: wrongOrRightAnswer, message: "La bonne réponse est \(questionAnswered.correctAnswer ?? "") ", preferredStyle: .alert)
+//            let action = UIAlertAction(title: "Ok", style: .default) { (action:UIAlertAction) in
+//                self.navigationController?.popViewController(animated: true)
+//            }
+//            wrongOrRightAnswerController.addAction(action)
+            //self.present(wrongOrRightAnswerController, animated: true, completion: nil)
+            //self.navigationController?.popViewController(animated: true)
             self.questionList[indexPath.row].userAnswer = userAnswer
             self.tableView.reloadData()
         }

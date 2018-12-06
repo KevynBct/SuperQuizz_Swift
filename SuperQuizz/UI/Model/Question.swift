@@ -49,4 +49,12 @@ class Question {
             return false
         }
     }
+    
+    func getPoint() -> Int {
+        if(userAnswer == correctAnswer){
+            return 1
+        }else {
+            return 0
+        }
+    }
 }
