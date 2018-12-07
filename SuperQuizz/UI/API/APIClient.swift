@@ -14,6 +14,7 @@ class APIClient {
     private let ANSWER_2 = "answer_2"
     private let ANSWER_3 = "answer_3"
     private let ANSWER_4 = "answer_4"
+    private let IMAGE_URL = "author_img_url"
     private let CORRECT_ANSWER = "correct_answer"
     private let AUTHOR = "author"
     private let urlServerAddress = "http://192.168.10.204:3000/questions"
@@ -47,6 +48,7 @@ class APIClient {
                     q.addProposition(objectDictionary[self.ANSWER_2] as! String)
                     q.addProposition(objectDictionary[self.ANSWER_3] as! String)
                     q.addProposition(objectDictionary[self.ANSWER_4] as! String)
+                    q.imageUrl = objectDictionary[self.IMAGE_URL] as? String
                     let correctAnswer = objectDictionary[self.CORRECT_ANSWER] as? Int ?? -1
                     q.correctAnswer = q.getProposition(correctAnswer - 1)
                     
@@ -72,6 +74,7 @@ class APIClient {
                                     self.ANSWER_3 : questionToAdd.getProposition(2),
                                     self.ANSWER_4 : questionToAdd.getProposition(3),
                                     self.CORRECT_ANSWER : questionToAdd.getCorrectAnswerIndex() + 1,
+                                    self.IMAGE_URL : questionToAdd.imageUrl ?? "",
                                     self.AUTHOR : "Kevyn"]
         
         
@@ -123,6 +126,7 @@ class APIClient {
                                     self.ANSWER_2 : questionToUpdate.getProposition(1),
                                     self.ANSWER_3 : questionToUpdate.getProposition(2),
                                     self.ANSWER_4 : questionToUpdate.getProposition(3),
+                                    self.IMAGE_URL : questionToUpdate.imageUrl ?? "",
                                     self.CORRECT_ANSWER : questionToUpdate.getCorrectAnswerIndex() + 1,
                                     self.AUTHOR : "Kevyn"]
         

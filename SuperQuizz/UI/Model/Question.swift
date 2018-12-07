@@ -12,6 +12,7 @@ class Question {
     var propositions = [String]()
     var correctAnswer : String?
     var userAnswer : String?
+    var imageUrl : String?
     
     init(_ questionTitle : String) {
         self.questionTitle = questionTitle

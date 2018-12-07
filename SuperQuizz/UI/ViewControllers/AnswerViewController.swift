@@ -17,6 +17,7 @@ class AnswerViewController: UIViewController {
     @IBOutlet weak var answer4: UIButton!
     @IBOutlet weak var questionProgressView: UIProgressView!
     var buttonsList : [UIButton]?
+    @IBOutlet weak var questionImageView: UIImageView!
     var onQuestionAnswered : ((_ question : Question, _ userAnswer : String) -> ())?
     var work : DispatchWorkItem?
     
@@ -31,6 +32,16 @@ class AnswerViewController: UIViewController {
         answer2.setTitle(question.getProposition(1), for: .normal)
         answer3.setTitle(question.getProposition(2), for: .normal)
         answer4.setTitle(question.getProposition(3), for: .normal)
+        
+        if let imageUrl = question.imageUrl{
+            let url = URL(string: imageUrl)
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: url!)
+                DispatchQueue.main.async {
+                    self.questionImageView.image = UIImage(data: data!)
+                }
+            }
+        }
         
         if let userAnswer = question.userAnswer{
             disableAllButtons(userAnswer)
@@ -65,9 +76,7 @@ class AnswerViewController: UIViewController {
         for button in self.buttonsList!{
             button.isEnabled = false
             if(button.titleLabel!.text == userAnswer){
-                print("label : \(button.titleLabel?.text)")
-                print("user : \(userAnswer)")
-                if(question.getPoint() > 0){
+                if(question.correctAnswer ==  userAnswer){
                     button.backgroundColor = UIColor.green
                     button.setTitleColor(UIColor.black, for: UIControl.State.normal)
                 }else{
