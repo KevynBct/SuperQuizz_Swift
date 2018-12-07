@@ -15,7 +15,7 @@ class QuestionsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "Liste des questions"
-
+        
         tableView.register(UINib(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
         
     }
@@ -58,10 +58,9 @@ class QuestionsTableViewController: UITableViewController {
         
         cell.questionTitleLabel.text = "\(indexPath.row + 1) - \(question.questionTitle)"
         
-        
         if(question.userAnswer != nil){
             if(question.isCorrectAnswer(answer: question.userAnswer!)){
-                cell.questionTitleLabel.textColor = UIColor.green
+                cell.questionTitleLabel.textColor = UIColor(red:0.41, green:0.94, blue:0.68, alpha:1.0)
             }else{
                 cell.questionTitleLabel.textColor = UIColor.red
             }
@@ -77,32 +76,16 @@ class QuestionsTableViewController: UITableViewController {
         guard let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AnswerViewController") as? AnswerViewController else {
             return
         }
-        
         controller.question = questionList[indexPath.row]
         
         controller.setOnReponseAnswered { (questionAnswered, userAnswer) in
-//            let wrongOrRightAnswer : String
-//            let result = questionAnswered.isCorrectAnswer(answer: userAnswer)
-//            if result{
-//                wrongOrRightAnswer = "Bonne réponse !"
-//            }else{
-//                wrongOrRightAnswer = "Mauvaise réponse..."
-//            }
-//            let wrongOrRightAnswerController = UIAlertController(title: wrongOrRightAnswer, message: "La bonne réponse est \(questionAnswered.correctAnswer ?? "") ", preferredStyle: .alert)
-//            let action = UIAlertAction(title: "Ok", style: .default) { (action:UIAlertAction) in
-//                self.navigationController?.popViewController(animated: true)
-//            }
-//            wrongOrRightAnswerController.addAction(action)
-            //self.present(wrongOrRightAnswerController, animated: true, completion: nil)
-            //self.navigationController?.popViewController(animated: true)
             self.questionList[indexPath.row].userAnswer = userAnswer
             self.tableView.reloadData()
         }
-        
         self.show(controller, sender: self)
     }
     
-    // MARK: - Delete question
+    // MARK: - Delete and Edit question actions
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
             
             let deleteQuestion = NSLocalizedString("Delete", comment: "Delete question")
@@ -124,8 +107,7 @@ class QuestionsTableViewController: UITableViewController {
                     })
                 }
                 
-                let actionCancel = UIAlertAction(title: "Non", style: .cancel, handler: { (action:UIAlertAction) in
-                })
+                let actionCancel = UIAlertAction(title: "Non", style: .cancel, handler: { (action:UIAlertAction) in /* Code */})
                 
                 confirmToDeleteAlertController.addAction(actionOk)
                 confirmToDeleteAlertController.addAction(actionCancel)

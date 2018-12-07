@@ -41,6 +41,16 @@ class CreateOrEditQuestionViewController: UIViewController{
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     @IBAction func createOrEditQuestion(_ sender: Any) {
         if !verifyTextFieldsAreNotEmpty(){
             return
@@ -127,6 +137,7 @@ class CreateOrEditQuestionViewController: UIViewController{
     
     @IBAction func onCancelButtonTap(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
 }

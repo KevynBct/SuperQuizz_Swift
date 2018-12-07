@@ -33,38 +33,31 @@ class AnswerViewController: UIViewController {
         answer3.setTitle(question.getProposition(2), for: .normal)
         answer4.setTitle(question.getProposition(3), for: .normal)
         
-        if let imageUrl = question.imageUrl{
-            let url = URL(string: imageUrl)
-            DispatchQueue.global().async {
-                let data = try? Data(contentsOf: url!)
-                DispatchQueue.main.async {
-                    self.questionImageView.image = UIImage(data: data!)
-                }
-            }
-        }
+        loadImageFromUrl()
         
         if let userAnswer = question.userAnswer{
             disableAllButtons(userAnswer)
-        }
-        
-        work = DispatchWorkItem{
-            var count = 1.0
-            while (count > 0){
-                if (self.work?.isCancelled ?? false){
-                    return;
+            self.questionProgressView.progress = 0.0
+        }else{
+            work = DispatchWorkItem{
+                var count = 1.0
+                while (count > 0){
+                    if (self.work?.isCancelled ?? false){
+                        return;
+                    }
+                    Thread.sleep(forTimeInterval: 0.04)
+                    count = count - 0.01
+                    DispatchQueue.main.async {
+                        self.questionProgressView.progress = Float(count)
+                    }
                 }
-                Thread.sleep(forTimeInterval: 0.04)
-                count = count - 0.01
                 DispatchQueue.main.async {
-                    self.questionProgressView.progress = Float(count)
+                    self.disableAllButtons("")
+                    self.onQuestionAnswered?(self.question, "")
                 }
             }
-            DispatchQueue.main.async {
-                self.onQuestionAnswered?(self.question, "")
-            }
+            DispatchQueue.global(qos : .userInitiated).async(execute: work!)
         }
-        
-        DispatchQueue.global(qos : .userInitiated).async(execute: work!)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,16 +65,29 @@ class AnswerViewController: UIViewController {
         work?.cancel()
     }
     
+    func loadImageFromUrl(){
+        guard let imageUrl = question.imageUrl else{return}
+        guard let url = URL(string: imageUrl) else {return}
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url) else {return}
+            DispatchQueue.main.async {
+                self.questionImageView.image = UIImage(data: data)
+            }
+        }
+    }
+    
     func disableAllButtons(_ userAnswer : String){
-        for button in self.buttonsList!{
-            button.isEnabled = false
-            if(button.titleLabel!.text == userAnswer){
-                if(question.correctAnswer ==  userAnswer){
-                    button.backgroundColor = UIColor.green
-                    button.setTitleColor(UIColor.black, for: UIControl.State.normal)
-                }else{
-                    button.backgroundColor = UIColor.red
-                    button.setTitleColor(UIColor.white, for: UIControl.State.normal)
+        UIView.animate(withDuration: 1) {
+            for button in self.buttonsList!{
+                button.isEnabled = false
+                if(button.titleLabel!.text == userAnswer){
+                    if(self.question.correctAnswer ==  userAnswer){
+                        button.backgroundColor = UIColor(red:0.41, green:0.94, blue:0.68, alpha:1.0)
+                        button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+                    }else{
+                        button.backgroundColor = UIColor.red
+                        button.setTitleColor(UIColor.white, for: UIControl.State.normal)
+                    }
                 }
             }
         }
@@ -91,9 +97,8 @@ class AnswerViewController: UIViewController {
         work?.cancel()
         let userAnswer = sender.titleLabel?.text ?? ""
         
-        UIView.animate(withDuration: 1) {
-            self.disableAllButtons(userAnswer)
-        }
+        self.disableAllButtons(userAnswer)
+        
         onQuestionAnswered?(question, userAnswer)
     }
     

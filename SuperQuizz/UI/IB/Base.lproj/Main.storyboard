@@ -244,7 +244,7 @@
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="LSQ-vT-MYA">
                                 <rect key="frame" x="32" y="388" width="256" height="2"/>
                             </progressView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y8W-1I-e9f">
+                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y8W-1I-e9f">
                                 <rect key="frame" x="20" y="187" width="280" height="161"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="161" id="qNd-sB-QDD"/>
@@ -258,7 +258,6 @@
                             <constraint firstItem="Rkf-fH-jod" firstAttribute="trailing" secondItem="EHw-1I-Wtp" secondAttribute="trailing" constant="20" id="3hk-qK-pxm"/>
                             <constraint firstItem="Y8W-1I-e9f" firstAttribute="trailing" secondItem="EHw-1I-Wtp" secondAttribute="trailing" id="46K-bB-pNW"/>
                             <constraint firstItem="Y8W-1I-e9f" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Rkf-fH-jod" secondAttribute="leading" constant="20" id="6wU-Oz-34P"/>
-                            <constraint firstItem="LSQ-vT-MYA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Y8W-1I-e9f" secondAttribute="bottom" constant="40" id="BTq-F6-KFV"/>
                             <constraint firstItem="Rkf-fH-jod" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Y8W-1I-e9f" secondAttribute="trailing" constant="20" id="Mag-pj-r9W"/>
                             <constraint firstItem="Rkf-fH-jod" firstAttribute="trailing" secondItem="rj8-Rl-cs3" secondAttribute="trailing" constant="12" id="P5U-x3-hpZ"/>
                             <constraint firstItem="Rkf-fH-jod" firstAttribute="bottom" secondItem="EHw-1I-Wtp" secondAttribute="bottom" constant="50" id="YwF-Sg-USd"/>

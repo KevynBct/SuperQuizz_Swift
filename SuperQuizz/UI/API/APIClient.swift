@@ -21,7 +21,6 @@ class APIClient {
     static let instance = APIClient()
     
     private init(){
-        
     }
     
     @discardableResult func getAllQuestionsFromServer(onSuccess: @escaping ([Question]) -> (), onError: @escaping (Error) -> ()) -> URLSessionTask {
@@ -33,7 +32,6 @@ class APIClient {
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             // Si j'ai des données
             if let data = data {
-                
                 
                 // Je la transforme en Array
                 let dataArray = try! JSONSerialization.jsonObject(with: data, options: []) as! [Any]
@@ -55,7 +53,6 @@ class APIClient {
                     questionsToreturn.append(q)
                 }
                 onSuccess(questionsToreturn)
-                
             } else  {
                 onError(error!)
             }
@@ -68,18 +65,7 @@ class APIClient {
     }
     
     @discardableResult func postQuestionOnServer(questionToAdd : Question, onSuccess: @escaping () -> (), onError: @escaping (Error) -> ())  -> URLSessionTask {
-        let json : [String: Any] = [self.TITLE : questionToAdd.questionTitle,
-                                    self.ANSWER_1 : questionToAdd.getProposition(0),
-                                    self.ANSWER_2 : questionToAdd.getProposition(1),
-                                    self.ANSWER_3 : questionToAdd.getProposition(2),
-                                    self.ANSWER_4 : questionToAdd.getProposition(3),
-                                    self.CORRECT_ANSWER : questionToAdd.getCorrectAnswerIndex() + 1,
-                                    self.IMAGE_URL : questionToAdd.imageUrl ?? "",
-                                    self.AUTHOR : "Kevyn"]
-        
-        
-        
-        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        let jsonData = createJsonDataFromQuestion(questionToAdd)
         
         var request = URLRequest(url: URL(string: urlServerAddress)! )
         request.httpMethod = "POST"
@@ -99,7 +85,6 @@ class APIClient {
     }
     
     @discardableResult func deleteQuestionOnServer(questionToDelete : Question, onSuccess: @escaping () -> (), onError: @escaping (Error) -> ())  -> URLSessionTask {
-        
         let questionToDeleteId = questionToDelete.questionId ?? -1
         
         var request = URLRequest(url: URL(string: "\(urlServerAddress)/\(questionToDeleteId)")! )
@@ -118,21 +103,9 @@ class APIClient {
     }
     
     @discardableResult func updateQuestionOnServer(questionToUpdate : Question, onSuccess: @escaping () -> (), onError: @escaping (Error) -> ())  -> URLSessionTask {
-        
         let questionToUpdateId = questionToUpdate.questionId ?? -1
-        
-        let json : [String: Any] = [self.TITLE : questionToUpdate.questionTitle,
-                                    self.ANSWER_1 : questionToUpdate.getProposition(0),
-                                    self.ANSWER_2 : questionToUpdate.getProposition(1),
-                                    self.ANSWER_3 : questionToUpdate.getProposition(2),
-                                    self.ANSWER_4 : questionToUpdate.getProposition(3),
-                                    self.IMAGE_URL : questionToUpdate.imageUrl ?? "",
-                                    self.CORRECT_ANSWER : questionToUpdate.getCorrectAnswerIndex() + 1,
-                                    self.AUTHOR : "Kevyn"]
-        
-        
-        
-        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+
+        let jsonData = createJsonDataFromQuestion(questionToUpdate)
         
         var request = URLRequest(url: URL(string: "\(urlServerAddress)/\(questionToUpdateId)")! )
         request.httpMethod = "PUT"
@@ -151,4 +124,18 @@ class APIClient {
         return task
     }
     
+    func createJsonDataFromQuestion(_ questionToParseInJson : Question) -> Data?{
+        let json : [String: Any] = [self.TITLE : questionToParseInJson.questionTitle,
+                                    self.ANSWER_1 : questionToParseInJson.getProposition(0),
+                                    self.ANSWER_2 : questionToParseInJson.getProposition(1),
+                                    self.ANSWER_3 : questionToParseInJson.getProposition(2),
+                                    self.ANSWER_4 : questionToParseInJson.getProposition(3),
+                                    self.IMAGE_URL : questionToParseInJson.imageUrl ?? "",
+                                    self.CORRECT_ANSWER : questionToParseInJson.getCorrectAnswerIndex() + 1,
+                                    self.AUTHOR : "Kevyn"]
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        return jsonData
+    }
 }

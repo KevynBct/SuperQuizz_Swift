@@ -34,9 +34,9 @@ class Question {
         switch correctAnswer {
         case getProposition(0):
             return 0
-        case getProposition(0):
+        case getProposition(1):
             return 1
-        case getProposition(0):
+        case getProposition(2):
             return 2
         default:
             return 3
