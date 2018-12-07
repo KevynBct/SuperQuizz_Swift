@@ -82,7 +82,7 @@ class AnswerViewController: UIViewController {
                 button.isEnabled = false
                 if(button.titleLabel!.text == userAnswer){
                     if(self.question.correctAnswer ==  userAnswer){
-                        button.backgroundColor = UIColor(red:0.41, green:0.94, blue:0.68, alpha:1.0)
+                        button.backgroundColor = UIColor.customGreen()
                         button.setTitleColor(UIColor.black, for: UIControl.State.normal)
                     }else{
                         button.backgroundColor = UIColor.red

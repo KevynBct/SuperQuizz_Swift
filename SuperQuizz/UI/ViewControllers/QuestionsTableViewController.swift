@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftIcons
 
 class QuestionsTableViewController: UITableViewController {
     var questionList = [Question]()
@@ -56,12 +57,15 @@ class QuestionsTableViewController: UITableViewController {
         
         let question : Question = questionList[indexPath.row]
         
-        cell.questionTitleLabel.text = "\(indexPath.row + 1) - \(question.questionTitle)"
+        cell.questionTitleLabel.text = "\(question.questionTitle)"
+        
         
         if(question.userAnswer != nil){
             if(question.isCorrectAnswer(answer: question.userAnswer!)){
-                cell.questionTitleLabel.textColor = UIColor(red:0.41, green:0.94, blue:0.68, alpha:1.0)
+                cell.imageViewCell.setIcon(icon: .linearIcons(.checkmarkCircle), textColor: UIColor.customGreen(), backgroundColor: .white, size: nil)
+                cell.questionTitleLabel.textColor = UIColor.customGreen()
             }else{
+                cell.imageViewCell.setIcon(icon: .linearIcons(.crossCircle), textColor: .red, backgroundColor: .white, size: nil)
                 cell.questionTitleLabel.textColor = UIColor.red
             }
         }else{

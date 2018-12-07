@@ -114,24 +114,28 @@
                             </textField>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7qr-ix-e0n">
                                 <rect key="frame" x="255" y="150" width="51" height="31"/>
+                                <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onAnswerSwitchButtonTap:" destination="GUG-Ud-0As" eventType="valueChanged" id="CGE-KN-JoB"/>
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TsJ-10-8Fw">
                                 <rect key="frame" x="255" y="197" width="51" height="31"/>
+                                <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onAnswerSwitchButtonTap:" destination="GUG-Ud-0As" eventType="valueChanged" id="ien-0L-azY"/>
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6uW-TU-5of">
                                 <rect key="frame" x="255" y="244" width="51" height="31"/>
+                                <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onAnswerSwitchButtonTap:" destination="GUG-Ud-0As" eventType="valueChanged" id="rmE-S6-ebh"/>
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7iQ-Xe-1Hd">
                                 <rect key="frame" x="255" y="291" width="51" height="31"/>
+                                <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onAnswerSwitchButtonTap:" destination="GUG-Ud-0As" eventType="valueChanged" id="Yn4-5I-j2f"/>
                                 </connections>
@@ -251,7 +255,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="EHw-1I-Wtp" firstAttribute="leading" secondItem="Rkf-fH-jod" secondAttribute="leading" constant="20" id="0tj-RR-HZ9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LSQ-vT-MYA" secondAttribute="trailing" constant="16" id="3P7-9M-zo6"/>
