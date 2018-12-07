@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftIcons
 
 class QuestionsTableViewController: UITableViewController {
     var questionList = [Question]()
@@ -15,7 +16,7 @@ class QuestionsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.title = "Liste des questions"
-
+        
         tableView.register(UINib(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
         
     }
@@ -29,6 +30,11 @@ class QuestionsTableViewController: UITableViewController {
             }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                var scoreCount = 0
+                for question in self.questionList{
+                    scoreCount += question.getPoint()
+                }
+                self.title = "Score \(scoreCount)/\(self.questionList.count)"
             }
         }) { (error) in
             print(error)
@@ -45,54 +51,45 @@ class QuestionsTableViewController: UITableViewController {
         return questionList.count
     }
 
+    // MARK: - Format des cellules
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell", for: indexPath) as! QuestionTableViewCell
         
         let question : Question = questionList[indexPath.row]
         
-        cell.questionTitleLabel.text = "\(indexPath.row + 1) - \(question.questionTitle)"
+        cell.questionTitleLabel.text = "\(question.questionTitle)"
         
         
         if(question.userAnswer != nil){
             if(question.isCorrectAnswer(answer: question.userAnswer!)){
-                cell.questionTitleLabel.textColor = UIColor.green
+                cell.imageViewCell.setIcon(icon: .linearIcons(.checkmarkCircle), textColor: UIColor.customGreen(), backgroundColor: .white, size: nil)
+                cell.questionTitleLabel.textColor = UIColor.customGreen()
             }else{
+                cell.imageViewCell.setIcon(icon: .linearIcons(.crossCircle), textColor: .red, backgroundColor: .white, size: nil)
                 cell.questionTitleLabel.textColor = UIColor.red
             }
+        }else{
+            cell.questionTitleLabel.textColor = UIColor.black
         }
     
         return cell
     }
     
+    // MARK: - User answer
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AnswerViewController") as? AnswerViewController else {
             return
         }
-        
         controller.question = questionList[indexPath.row]
         
         controller.setOnReponseAnswered { (questionAnswered, userAnswer) in
-            let wrongOrRightAnswer : String
-            let result = questionAnswered.isCorrectAnswer(answer: userAnswer)
-            if result{
-                wrongOrRightAnswer = "Bonne réponse !"
-            }else{
-                wrongOrRightAnswer = "Mauvaise réponse..."
-            }
-            let wrongOrRightAnswerController = UIAlertController(title: wrongOrRightAnswer, message: "La bonne réponse est \(questionAnswered.correctAnswer ?? "") ", preferredStyle: .alert)
-            let action = UIAlertAction(title: "Ok", style: .default) { (action:UIAlertAction) in
-                self.navigationController?.popViewController(animated: true)
-            }
-            wrongOrRightAnswerController.addAction(action)
-            self.present(wrongOrRightAnswerController, animated: true, completion: nil)
-            
             self.questionList[indexPath.row].userAnswer = userAnswer
             self.tableView.reloadData()
         }
-        
         self.show(controller, sender: self)
     }
     
+    // MARK: - Delete and Edit question actions
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
             
             let deleteQuestion = NSLocalizedString("Delete", comment: "Delete question")
@@ -100,18 +97,21 @@ class QuestionsTableViewController: UITableViewController {
                 let confirmToDeleteAlertController = UIAlertController(title: "Confirmation", message: "Voulez vous vraiment supprimer cette question ?", preferredStyle: .alert)
                 
                 let actionOk = UIAlertAction(title: "Oui", style: .default) { (action:UIAlertAction) in
+                    
                     APIClient.instance.deleteQuestionOnServer(questionToDelete: self.questionList[indexPath.row], onSuccess: {
-                        print("Question supprimée")
-                        self.viewWillAppear(true)
+                    print("Question supprimée")
+                    DispatchQueue.main.async {
+                        self.questionList.remove(at: indexPath.row)
+                        self.tableView.beginUpdates()
+                        self.tableView.deleteRows(at: [indexPath], with: .fade)
+                        self.tableView.endUpdates()
+                    }
                     }, onError: { (error) in
                         print(error)
                     })
-                    //self.questionList.remove(at: indexPath.row)
-                    self.tableView.reloadData()
                 }
                 
-                let actionCancel = UIAlertAction(title: "Non", style: .cancel, handler: { (action:UIAlertAction) in
-                })
+                let actionCancel = UIAlertAction(title: "Non", style: .cancel, handler: { (action:UIAlertAction) in /* Code */})
                 
                 confirmToDeleteAlertController.addAction(actionOk)
                 confirmToDeleteAlertController.addAction(actionCancel)
@@ -135,6 +135,7 @@ class QuestionsTableViewController: UITableViewController {
             return [editAction, deleteAction]
     }
     
+    // MARK: - Create or Edit
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showCreateOrEditViewController" {
             let controller = segue.destination as! CreateOrEditQuestionViewController
@@ -145,7 +146,7 @@ class QuestionsTableViewController: UITableViewController {
 
 extension QuestionsTableViewController : CreateOrEditQuestionDelegate {
     func userDidEditQuestion(q: Question, index : Int) {
-        APIClient.instance.updateQuestionOnServer(questionToUpdate: q, onSuccess: {
+         APIClient.instance.updateQuestionOnServer(questionToUpdate: q, onSuccess: {
             print("Question modifiée")
         }) { (error) in
             print(error)

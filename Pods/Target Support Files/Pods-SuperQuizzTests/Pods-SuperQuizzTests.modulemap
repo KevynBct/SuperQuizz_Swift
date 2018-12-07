@@ -1,0 +1,6 @@
+framework module Pods_SuperQuizzTests {
+  umbrella header "Pods-SuperQuizzTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -12,6 +12,7 @@ class Question {
     var propositions = [String]()
     var correctAnswer : String?
     var userAnswer : String?
+    var imageUrl : String?
     
     init(_ questionTitle : String) {
         self.questionTitle = questionTitle
@@ -33,9 +34,9 @@ class Question {
         switch correctAnswer {
         case getProposition(0):
             return 0
-        case getProposition(0):
+        case getProposition(1):
             return 1
-        case getProposition(0):
+        case getProposition(2):
             return 2
         default:
             return 3
@@ -47,6 +48,14 @@ class Question {
             return true
         }else{
             return false
+        }
+    }
+    
+    func getPoint() -> Int {
+        if(userAnswer == correctAnswer){
+            return 1
+        }else {
+            return 0
         }
     }
 }

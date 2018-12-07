@@ -114,24 +114,28 @@
                             </textField>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7qr-ix-e0n">
                                 <rect key="frame" x="255" y="150" width="51" height="31"/>
+                                <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onAnswerSwitchButtonTap:" destination="GUG-Ud-0As" eventType="valueChanged" id="CGE-KN-JoB"/>
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="TsJ-10-8Fw">
                                 <rect key="frame" x="255" y="197" width="51" height="31"/>
+                                <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onAnswerSwitchButtonTap:" destination="GUG-Ud-0As" eventType="valueChanged" id="ien-0L-azY"/>
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6uW-TU-5of">
                                 <rect key="frame" x="255" y="244" width="51" height="31"/>
+                                <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onAnswerSwitchButtonTap:" destination="GUG-Ud-0As" eventType="valueChanged" id="rmE-S6-ebh"/>
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7iQ-Xe-1Hd">
                                 <rect key="frame" x="255" y="291" width="51" height="31"/>
+                                <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="onAnswerSwitchButtonTap:" destination="GUG-Ud-0As" eventType="valueChanged" id="Yn4-5I-j2f"/>
                                 </connections>
@@ -204,14 +208,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Afq-4J-ayi">
                                         <rect key="frame" x="0.0" y="0.0" width="280" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="answer1" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neX-UX-IyX">
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="answer1" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="neX-UX-IyX">
                                                 <rect key="frame" x="0.0" y="0.0" width="135" height="30"/>
                                                 <state key="normal" title="Answer1"/>
                                                 <connections>
                                                     <action selector="onButtonAnswerTap:" destination="2jA-oJ-rnD" eventType="touchUpInside" id="kyW-9F-40e"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="answer2" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2T-qV-L0A">
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="answer2" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Q2T-qV-L0A">
                                                 <rect key="frame" x="145" y="0.0" width="135" height="30"/>
                                                 <state key="normal" title="Answer2"/>
                                                 <connections>
@@ -223,14 +227,14 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="AuO-TQ-ld8">
                                         <rect key="frame" x="0.0" y="74" width="280" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="answer3" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3h-Ke-Dy0">
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="answer3" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="P3h-Ke-Dy0">
                                                 <rect key="frame" x="0.0" y="0.0" width="135" height="30"/>
                                                 <state key="normal" title="Answer3"/>
                                                 <connections>
                                                     <action selector="onButtonAnswerTap:" destination="2jA-oJ-rnD" eventType="touchUpInside" id="nCO-Fa-adP"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="answer4" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAY-Qk-eCp">
+                                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="answer4" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ZAY-Qk-eCp">
                                                 <rect key="frame" x="145" y="0.0" width="135" height="30"/>
                                                 <state key="normal" title="Answer4"/>
                                                 <connections>
@@ -244,17 +248,29 @@
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="LSQ-vT-MYA">
                                 <rect key="frame" x="32" y="388" width="256" height="2"/>
                             </progressView>
+                            <imageView userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y8W-1I-e9f">
+                                <rect key="frame" x="20" y="187" width="280" height="161"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="161" id="qNd-sB-QDD"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="EHw-1I-Wtp" firstAttribute="leading" secondItem="Rkf-fH-jod" secondAttribute="leading" constant="20" id="0tj-RR-HZ9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LSQ-vT-MYA" secondAttribute="trailing" constant="16" id="3P7-9M-zo6"/>
                             <constraint firstItem="Rkf-fH-jod" firstAttribute="trailing" secondItem="EHw-1I-Wtp" secondAttribute="trailing" constant="20" id="3hk-qK-pxm"/>
+                            <constraint firstItem="Y8W-1I-e9f" firstAttribute="trailing" secondItem="EHw-1I-Wtp" secondAttribute="trailing" id="46K-bB-pNW"/>
+                            <constraint firstItem="Y8W-1I-e9f" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Rkf-fH-jod" secondAttribute="leading" constant="20" id="6wU-Oz-34P"/>
+                            <constraint firstItem="Rkf-fH-jod" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Y8W-1I-e9f" secondAttribute="trailing" constant="20" id="Mag-pj-r9W"/>
                             <constraint firstItem="Rkf-fH-jod" firstAttribute="trailing" secondItem="rj8-Rl-cs3" secondAttribute="trailing" constant="12" id="P5U-x3-hpZ"/>
                             <constraint firstItem="Rkf-fH-jod" firstAttribute="bottom" secondItem="EHw-1I-Wtp" secondAttribute="bottom" constant="50" id="YwF-Sg-USd"/>
+                            <constraint firstItem="Y8W-1I-e9f" firstAttribute="top" relation="greaterThanOrEqual" secondItem="rj8-Rl-cs3" secondAttribute="bottom" constant="40" id="bMc-yb-iFM"/>
+                            <constraint firstItem="Y8W-1I-e9f" firstAttribute="leading" secondItem="EHw-1I-Wtp" secondAttribute="leading" id="cbl-gB-xc1"/>
                             <constraint firstItem="LSQ-vT-MYA" firstAttribute="leading" secondItem="sEa-Il-ChH" secondAttribute="leadingMargin" constant="16" id="fFH-Z0-VLZ"/>
                             <constraint firstItem="EHw-1I-Wtp" firstAttribute="top" secondItem="LSQ-vT-MYA" secondAttribute="bottom" constant="24" id="hza-qP-azg"/>
                             <constraint firstItem="rj8-Rl-cs3" firstAttribute="leading" secondItem="Rkf-fH-jod" secondAttribute="leading" constant="12" id="muH-6M-FUB"/>
+                            <constraint firstItem="LSQ-vT-MYA" firstAttribute="top" secondItem="Y8W-1I-e9f" secondAttribute="bottom" constant="40" id="s5N-1y-g87"/>
                             <constraint firstItem="rj8-Rl-cs3" firstAttribute="top" secondItem="Rkf-fH-jod" secondAttribute="top" constant="12" id="ucj-7s-ccC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rkf-fH-jod"/>
@@ -265,6 +281,7 @@
                         <outlet property="answer3" destination="P3h-Ke-Dy0" id="QK5-SR-SWa"/>
                         <outlet property="answer4" destination="ZAY-Qk-eCp" id="hVs-l9-lay"/>
                         <outlet property="answerQuestionLabel" destination="rj8-Rl-cs3" id="59i-8A-VyX"/>
+                        <outlet property="questionImageView" destination="Y8W-1I-e9f" id="arD-NL-8IZ"/>
                         <outlet property="questionProgressView" destination="LSQ-vT-MYA" id="u6i-MG-1La"/>
                     </connections>
                 </viewController>
