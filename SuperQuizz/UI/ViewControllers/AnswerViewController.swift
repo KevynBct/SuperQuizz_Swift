@@ -63,6 +63,7 @@ class AnswerViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         work?.cancel()
+        question = nil
     }
     
     func loadImageFromUrl(){
